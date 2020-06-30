@@ -1,0 +1,115 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="41FD3610-1B89-A82F-7A87-0D0921D70FE4" name="ZONA">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:46:00 UTC</createdTime>
+<generatorID>50E2D50E-E074-1A75-EB7A-DF42CF7C2E8B</generatorID>
+<ownerDesignName>Archivo DataModeler</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Id_Zona" id="4369CA00-1EB6-FF58-DB25-0039B1C0B771">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:46:00 UTC</createdTime>
+<generatorID>F0A9C602-0071-9883-C9A6-C9EC192D92D1</generatorID>
+<ownerDesignName>Archivo DataModeler</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="MUNICIPIO_Id_Municipio" id="521AECF4-744A-69EA-A565-95B13CE50A05">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:46:00 UTC</createdTime>
+<generatorID>BD2ED5B9-2570-3380-4C8D-068C5B173637</generatorID>
+<ownerDesignName>Archivo DataModeler</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="46C49AB7-9600-D58E-0A20-BA7D376B7BC2" referredColumn="2B9B8768-CD42-A7B3-E460-91446317910A"/>
+</associations>
+</Column>
+<Column name="DEPARTAMENTO_Id_Departamento" id="2518FF5B-4B11-E1D1-E3E0-1CA77E14C350">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:46:00 UTC</createdTime>
+<generatorID>0674A915-4BAF-8C4F-7642-7A57AB671F57</generatorID>
+<ownerDesignName>Archivo DataModeler</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="22A805AD-272C-3A94-9A44-819851F30D42" referredColumn="3B0790D6-BED3-142B-2F2D-9C60741823B4"/>
+</associations>
+</Column>
+<Column name="PAIS_Id_Pais" id="A1F1E4D7-B263-B512-C20B-1C4B91142A56">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:46:00 UTC</createdTime>
+<generatorID>1E621AD1-DF62-2FF8-16F4-B3F0935821CA</generatorID>
+<ownerDesignName>Archivo DataModeler</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="9A3554E9-1BFC-213E-7FB9-F72F8949229F" referredColumn="35964E7A-6DF6-7E53-53FF-D7AAE050D4DD"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="1B67B66B-D092-8E03-AD5A-E5DDDA01C4DC" name="ZONA_PK">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:46:00 UTC</createdTime>
+<generatorID>6D9F14EB-B6B0-8D7F-495E-605C04498FF7</generatorID>
+<ownerDesignName>Archivo DataModeler</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="4369CA00-1EB6-FF58-DB25-0039B1C0B771"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="6812638B-F618-733D-94E5-A62EB20841D7" name="ZONA_MUNICIPIO_FK">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:46:00 UTC</createdTime>
+<generatorID>8D5F3B9B-44BE-391D-0880-A9D5465B1349</generatorID>
+<ownerDesignName>Archivo DataModeler</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="521AECF4-744A-69EA-A565-95B13CE50A05"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="95137A9F-98CE-9A8E-0A2D-E1801C24D6D7" name="ZONA_DEPARTAMENTO_FK">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:46:00 UTC</createdTime>
+<generatorID>0F61FF25-528C-69BE-48D6-11F94496552D</generatorID>
+<ownerDesignName>Archivo DataModeler</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2518FF5B-4B11-E1D1-E3E0-1CA77E14C350"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="22B5A9A7-EC76-A2C6-D656-1794B6847F6A" name="ZONA_PAIS_FK">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:46:00 UTC</createdTime>
+<generatorID>86AA2C24-A21D-F8AB-C912-757E3F0435B9</generatorID>
+<ownerDesignName>Archivo DataModeler</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A1F1E4D7-B263-B512-C20B-1C4B91142A56"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

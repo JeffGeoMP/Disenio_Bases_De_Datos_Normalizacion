@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="22A805AD-272C-3A94-9A44-819851F30D42" containerWithKeyObject="41FD3610-1B89-A82F-7A87-0D0921D70FE4" localFKIndex="95137A9F-98CE-9A8E-0A2D-E1801C24D6D7" name="ZONA_DEPARTAMENTO_FK">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:46:00 UTC</createdTime>
+<generatorID>0F61FF25-528C-69BE-48D6-11F94496552D</generatorID>
+<ownerDesignName>Archivo DataModeler</ownerDesignName>
+<referredTableLongName>DEPARTAMENTO</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>E5BA914B-CA45-43FE-34F3-800BF508C9B8</referredTableID>
+<keyObject>C66125AE-09CA-012A-54C4-42316257ED93</keyObject>
+<referredKeyID>C66125AE-09CA-012A-54C4-42316257ED93</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>Id_Departamento</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

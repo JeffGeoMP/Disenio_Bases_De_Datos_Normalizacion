@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="BEEBFEEF-4D6E-E26C-30EF-34F9A8096CEC" containerWithKeyObject="9C5E093B-230A-97FF-50C9-243511EF9187" localFKIndex="1B4EB5BD-CF51-6DD4-4592-04AF40E3986E" name="ELECCION_ZONA_FK">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:46:00 UTC</createdTime>
+<generatorID>BC51F652-52B3-78D5-7D25-46C2F351C4CE</generatorID>
+<ownerDesignName>Archivo DataModeler</ownerDesignName>
+<referredTableLongName>ZONA</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>41FD3610-1B89-A82F-7A87-0D0921D70FE4</referredTableID>
+<keyObject>1B67B66B-D092-8E03-AD5A-E5DDDA01C4DC</keyObject>
+<referredKeyID>1B67B66B-D092-8E03-AD5A-E5DDDA01C4DC</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>Id_Zona</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>
