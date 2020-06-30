@@ -1,0 +1,84 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="6D5A7EBD-DBFB-3F55-B548-09F9027A1E7E" name="ELECCION">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:09:36 UTC</createdTime>
+<ownerDesignName>Data</ownerDesignName>
+<engineerTo>
+<item key="288CB6C6-9285-816B-A5DA-ADEFD1A51F22" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="Id_Eleccion" id="71ED8192-8309-95C8-3EB3-210B643E3E63">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:09:49 UTC</createdTime>
+<ownerDesignName>Data</ownerDesignName>
+<engineerTo>
+<item key="288CB6C6-9285-816B-A5DA-ADEFD1A51F22" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Nombre" id="7B5909C9-0B6B-EEB4-291F-094C56814077">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:10:04 UTC</createdTime>
+<ownerDesignName>Data</ownerDesignName>
+<engineerTo>
+<item key="288CB6C6-9285-816B-A5DA-ADEFD1A51F22" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50 CHAR</dataTypeSize>
+<ownDataTypeParameters>50 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Año" id="1F981FAF-2CB1-0642-5D55-F7A8C6DBD815">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:10:20 UTC</createdTime>
+<ownerDesignName>Data</ownerDesignName>
+<engineerTo>
+<item key="288CB6C6-9285-816B-A5DA-ADEFD1A51F22" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Id_Zona" id="39D859E1-43EA-80EF-45C2-208E0B5B36BD">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:38:35 UTC</createdTime>
+<generatorID>BC51F652-52B3-78D5-7D25-46C2F351C4CE</generatorID>
+<ownerDesignName>Data</ownerDesignName>
+<engineerTo>
+<item key="288CB6C6-9285-816B-A5DA-ADEFD1A51F22" value="true"/>
+</engineerTo>
+<referedAttribute>F0A9C602-0071-9883-C9A6-C9EC192D92D1</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="07BE6D74-9D12-C4AE-2114-83BA4AEAB0EA" name="ELECCION PK">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:10:02 UTC</createdTime>
+<ownerDesignName>Data</ownerDesignName>
+<engineerTo>
+<item key="288CB6C6-9285-816B-A5DA-ADEFD1A51F22" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>71ED8192-8309-95C8-3EB3-210B643E3E63</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

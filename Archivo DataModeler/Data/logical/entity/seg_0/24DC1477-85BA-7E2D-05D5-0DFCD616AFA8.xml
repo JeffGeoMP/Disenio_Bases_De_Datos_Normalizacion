@@ -1,0 +1,58 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="24DC1477-85BA-7E2D-05D5-0DFCD616AFA8" name="RAZA">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 07:56:16 UTC</createdTime>
+<ownerDesignName>Data</ownerDesignName>
+<engineerTo>
+<item key="288CB6C6-9285-816B-A5DA-ADEFD1A51F22" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="Id_Raza" id="EF1CE879-FC5C-E61E-755F-634890234844">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 07:56:22 UTC</createdTime>
+<ownerDesignName>Data</ownerDesignName>
+<engineerTo>
+<item key="288CB6C6-9285-816B-A5DA-ADEFD1A51F22" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Nombre" id="6D2B47C8-04B6-C29E-51D3-844B21D0820C">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 07:56:32 UTC</createdTime>
+<ownerDesignName>Data</ownerDesignName>
+<engineerTo>
+<item key="288CB6C6-9285-816B-A5DA-ADEFD1A51F22" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>25 CHAR</dataTypeSize>
+<ownDataTypeParameters>25 CHAR,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="5BBF60C4-BDE1-CEB6-3080-F3D6E18DA254" name="RAZA PK">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 07:56:31 UTC</createdTime>
+<ownerDesignName>Data</ownerDesignName>
+<engineerTo>
+<item key="288CB6C6-9285-816B-A5DA-ADEFD1A51F22" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>EF1CE879-FC5C-E61E-755F-634890234844</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

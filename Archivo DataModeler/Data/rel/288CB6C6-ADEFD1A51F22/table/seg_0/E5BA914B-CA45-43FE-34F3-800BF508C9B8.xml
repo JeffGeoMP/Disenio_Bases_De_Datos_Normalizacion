@@ -1,0 +1,61 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="E5BA914B-CA45-43FE-34F3-800BF508C9B8" name="DEPARTAMENTO">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:46:00 UTC</createdTime>
+<generatorID>91BEA46C-3399-3F3D-162A-6E71E5DBB10B</generatorID>
+<ownerDesignName>Data</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Id_Departamento" id="3B0790D6-BED3-142B-2F2D-9C60741823B4">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:46:00 UTC</createdTime>
+<generatorID>3811B61B-9293-20E1-7F18-8F4FC406A7CB</generatorID>
+<ownerDesignName>Data</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Nombre" id="A0DC9E97-7AEE-7EAC-F9CE-DD05296FDE13">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:46:00 UTC</createdTime>
+<generatorID>C26B569D-FB63-E476-6F10-4360868AD84E</generatorID>
+<ownerDesignName>Data</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50 CHAR</dataTypeSize>
+<ownDataTypeParameters>50 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Region" id="C2203E6E-105D-DC99-8D3C-7235FD6CB4D2">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:46:00 UTC</createdTime>
+<generatorID>276F489F-6F1F-020A-4E41-724E8938AC14</generatorID>
+<ownerDesignName>Data</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>20 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="C66125AE-09CA-012A-54C4-42316257ED93" name="DEPARTAMENTO_PK">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:46:00 UTC</createdTime>
+<generatorID>3E1D7005-A3CC-34F1-DDC6-028EAA0420EA</generatorID>
+<ownerDesignName>Data</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3B0790D6-BED3-142B-2F2D-9C60741823B4"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

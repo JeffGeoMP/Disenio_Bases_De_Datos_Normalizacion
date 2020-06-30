@@ -1,0 +1,61 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="974B94B8-7FB2-F682-D00A-F18100B8904B" name="PARTIDO">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:46:00 UTC</createdTime>
+<generatorID>29358E45-AF58-41A1-F867-9BFCC53AC6B3</generatorID>
+<ownerDesignName>Data</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Id_Partido" id="B30237CA-57C5-88F9-DB26-CDC57F3FE911">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:46:00 UTC</createdTime>
+<generatorID>9E38A78A-513A-05C5-6F1E-75958463C7FF</generatorID>
+<ownerDesignName>Data</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Siglas" id="4CDDE0A4-05D5-5202-AF3C-BAE06AAB3E2C">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:46:00 UTC</createdTime>
+<generatorID>002B9631-72E6-3641-FAF6-E837B0F88159</generatorID>
+<ownerDesignName>Data</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10 CHAR</dataTypeSize>
+<ownDataTypeParameters>10 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Nombre" id="A17756DA-1BA1-1F62-7E9C-F174B02260E1">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:46:00 UTC</createdTime>
+<generatorID>8D922C72-3192-95F0-1977-19E3BBA4214C</generatorID>
+<ownerDesignName>Data</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>30 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="3317CE7A-772B-338A-BF12-A3E0F7DFF317" name="PARTIDO_PK">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:46:00 UTC</createdTime>
+<generatorID>48D5D6BA-8EAA-BB4C-6320-268474E582BF</generatorID>
+<ownerDesignName>Data</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B30237CA-57C5-88F9-DB26-CDC57F3FE911"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

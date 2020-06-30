@@ -1,0 +1,86 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="9C5E093B-230A-97FF-50C9-243511EF9187" name="ELECCION">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:46:00 UTC</createdTime>
+<generatorID>6D5A7EBD-DBFB-3F55-B548-09F9027A1E7E</generatorID>
+<ownerDesignName>Data</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Id_Eleccion" id="D7D775F5-5037-9696-7BD1-F05D2D31C27F">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:46:00 UTC</createdTime>
+<generatorID>71ED8192-8309-95C8-3EB3-210B643E3E63</generatorID>
+<ownerDesignName>Data</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Nombre" id="0E2E5B31-208C-3769-20B1-8E8C059820BF">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:46:00 UTC</createdTime>
+<generatorID>7B5909C9-0B6B-EEB4-291F-094C56814077</generatorID>
+<ownerDesignName>Data</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50 CHAR</dataTypeSize>
+<ownDataTypeParameters>50 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Año" id="21A67408-75C0-B51A-D8BE-6D8775EC6815">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:46:00 UTC</createdTime>
+<generatorID>1F981FAF-2CB1-0642-5D55-F7A8C6DBD815</generatorID>
+<ownerDesignName>Data</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ZONA_Id_Zona" id="7B6025F1-33D4-557D-9F6D-21D0A98C880C">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:46:00 UTC</createdTime>
+<generatorID>39D859E1-43EA-80EF-45C2-208E0B5B36BD</generatorID>
+<ownerDesignName>Data</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="BEEBFEEF-4D6E-E26C-30EF-34F9A8096CEC" referredColumn="4369CA00-1EB6-FF58-DB25-0039B1C0B771"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="910DE4B0-0E07-E2F0-8344-3E3FE4C0BE77" name="ELECCION_PK">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:46:00 UTC</createdTime>
+<generatorID>07BE6D74-9D12-C4AE-2114-83BA4AEAB0EA</generatorID>
+<ownerDesignName>Data</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D7D775F5-5037-9696-7BD1-F05D2D31C27F"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="1B4EB5BD-CF51-6DD4-4592-04AF40E3986E" name="ELECCION_ZONA_FK">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:46:00 UTC</createdTime>
+<generatorID>BC51F652-52B3-78D5-7D25-46C2F351C4CE</generatorID>
+<ownerDesignName>Data</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7B6025F1-33D4-557D-9F6D-21D0A98C880C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

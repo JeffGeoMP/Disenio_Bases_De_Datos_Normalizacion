@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="Data" id="BC3F4E77-DC89-0B47-0A75-B593E894ACB6" version="3.5">
+<createdBy>Jeffe</createdBy>
+<createdTime>2020-06-30 08:21:55 UTC</createdTime>
+<ownerDesignName>Archivo DataModeler</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>BC3F4E77-DC89-0B47-0A75-B593E894ACB6</designId>
+</OSDM_Design>
