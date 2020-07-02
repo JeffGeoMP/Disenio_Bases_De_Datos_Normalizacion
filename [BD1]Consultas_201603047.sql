@@ -1,5 +1,29 @@
 USE Proyecto2;
 
+/*FUNCIONES
+
+DELIMITER $$
+CREATE FUNCTION calculo_porcentaje (Dato INTEGER, Total INTEGER)
+RETURNS FLOAT
+DETERMINISTIC
+BEGIN 
+	DECLARE porcentaje FLOAT;
+    SET porcentaje = Dato*100;
+    SET porcentaje = porcentaje/Total;
+RETURN porcentaje;
+END $$
+
+select * from data_temporal;
+select * from detalle_eleccion;
+select * from municipio;
+select * from departamento;
+select * from pais;
+select * from zona;
+select * from eleccion;
+select * from partido;
+
+*/
+
 /*
 -------------------------- CONSULTA NO. 1 --------------------------------------
 Desplegar para cada elección el país y el partido político que obtuvo 
@@ -7,6 +31,35 @@ mayor porcentaje de votos en su país. Debe desplegar el nombre de la elección,
 el año de la elección, el país, el nombre del partido político y el porcentaje
 que obtuvo de votos en su país.
 */
+SELECT 
+	e.nombre AS Eleccion, 
+    e.año AS Año, 
+    p.nombre AS Pais, 
+    pt.nombre AS Partido,
+    calculo_porcentaje(SUM(analfabetos + alfabetos), (SELECT SUM(analfabetos + alfabetos) FROM detalle_eleccion de2
+															INNER JOIN eleccion e2 ON de2.id_eleccion = e2.id_eleccion
+															INNER JOIN zona z2 ON e2.id_zona = z2.id_zona
+															WHERE z2.id_pais = p.id_pais)) AS Porcentaje
+FROM detalle_eleccion de
+INNER JOIN eleccion e ON de.id_eleccion = e.id_eleccion
+INNER JOIN zona z ON e.id_zona = z.id_zona
+INNER JOIN pais p ON z.id_pais = p.id_pais
+INNER JOIN partido pt ON de.id_partido = pt.id_partido
+GROUP BY e.nombre, e.año, p.nombre, pt.nombre
+HAVING Porcentaje = (SELECT MAX(tp.Porcentaje) AS Porcentaje_Maximo FROM (
+	SELECT calculo_porcentaje (SUM(analfabetos + alfabetos), (SELECT SUM(analfabetos + alfabetos) FROM detalle_eleccion de3
+																INNER JOIN eleccion e3 ON de3.id_eleccion = e3.id_eleccion
+																INNER JOIN zona z3 ON e3.id_zona = z3.id_zona
+                                                                INNER JOIN pais p3 ON z3.id_pais = p3.id_pais
+																WHERE p3.nombre = Pais)) AS Porcentaje
+	FROM detalle_eleccion de4
+	INNER JOIN eleccion e4 ON de4.id_eleccion = e4.id_eleccion
+	INNER JOIN zona z4 ON e4.id_zona = z4.id_zona
+	INNER JOIN pais p4 ON z4.id_pais = p4.id_pais
+    WHERE p4.nombre = Pais
+	GROUP by e4.nombre, z4.id_pais, de4.id_partido) tp);
+
+
 
 /*
 -------------------------- CONSULTA NO. 2 --------------------------------------
@@ -14,7 +67,22 @@ Desplegar total de votos y porcentaje de votos de mujeres por departamento y pa�
 El ciento por ciento es el total de votos de mujeres por país. (Tip: Todos los
 porcentajes por departamento de un país deben sumar el 100%)
 */
-
+-- Total de Votos con Porcentaje
+SELECT p.nombre AS Pais, 
+	   d.nombre AS Departamento, 
+       SUM(analfabetos + alfabetos) AS Votos,
+       calculo_porcentaje(SUM(analfabetos + alfabetos), (SELECT SUM(analfabetos + alfabetos) AS Total 
+																						FROM detalle_eleccion de2
+																						INNER JOIN eleccion e2 ON de2.id_eleccion = e2.id_zona
+																						INNER JOIN zona z2 ON e2.id_zona = z2.id_zona
+																						WHERE de2.sexo = 'mujeres' AND z2.id_pais = z.id_pais)) AS Porcentaje 
+FROM detalle_eleccion de
+INNER JOIN eleccion e ON de.id_eleccion = e.id_zona
+INNER JOIN zona z ON e.id_zona = z.id_zona
+INNER JOIN pais p ON z.id_pais = p.id_pais
+INNER JOIN departamento d ON z.id_departamento = d.id_departamento
+WHERE de.sexo = 'mujeres' 
+GROUP BY z.id_pais, z.id_departamento;
 
 /*
 -------------------------- CONSULTA NO. 3 --------------------------------------
