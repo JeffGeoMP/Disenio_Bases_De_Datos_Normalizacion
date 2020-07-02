@@ -24,8 +24,6 @@ SEXO				VARCHAR(10),
 RAZA				VARCHAR(15),
 ANALFABETOS			INT,
 ALFABETOS			INT,
-SEXO2				VARCHAR(10),
-RAZA2				VARCHAR (15),
 PRIMARIA			INT,
 NIVEL_MEDIO			INT,
 UNIVERSITARIOS		INT
@@ -33,7 +31,7 @@ UNIVERSITARIOS		INT
 /*----------------------------------------------------------------------------------------*/
 
 /*-------------------- Carga Masiva de Datos a partir del CSV ----------------------------*/
-LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/ICE-Fuente.csv'
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/ICE-FUENTE-MEJORADO.csv'
 INTO TABLE Proyecto2.data_temporal
 FIELDS TERMINATED BY ';'
 ENCLOSED BY '"'
