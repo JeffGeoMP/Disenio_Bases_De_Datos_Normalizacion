@@ -17,6 +17,7 @@ select * from data_temporal;
 select * from detalle_eleccion;
 select * from municipio;
 select * from departamento;
+select * from raza;
 select * from pais;
 select * from zona;
 select * from eleccion;
@@ -137,7 +138,26 @@ HAVING Alcaldias = (SELECT MAX(Alcaldias3) FROM (SELECT td2.Pais2 AS Pais3,
 Desplegar todas las regiones por país en las que predomina la raza indígena. 
 Es decir, hay más votos que las otras razas.
 */
-
+SELECT p.nombre AS Pais,
+		d.region AS Region,
+        r.nombre AS Raza,
+        SUM(analfabetos + alfabetos) AS Votos 
+FROM detalle_eleccion de
+INNER JOIN eleccion e ON de.id_eleccion = e.id_eleccion
+INNER JOIN zona z ON e.id_zona = z.id_zona
+INNER JOIN pais p ON z.id_pais = p.id_pais
+INNER JOIN raza r ON de.id_raza = r.id_raza
+INNER JOIN departamento d ON z.id_departamento = d.id_departamento
+GROUP BY z.id_pais, d.region, de.id_raza
+HAVING Votos = (SELECT MAX(td1.Votos) FROM (SELECT p2.nombre AS Pais2, d2.region AS Region2, r2.nombre AS Raza2, SUM(de2.analfabetos + de2.alfabetos) AS Votos 
+							FROM detalle_eleccion de2
+							INNER JOIN eleccion e2 ON de2.id_eleccion = e2.id_eleccion
+							INNER JOIN zona z2 ON e2.id_zona = z2.id_zona
+							INNER JOIN pais p2 ON z2.id_pais = p2.id_pais
+							INNER JOIN raza r2 ON de2.id_raza = r2.id_raza
+							INNER JOIN departamento d2 ON z2.id_departamento = d2.id_departamento
+							WHERE p2.nombre = Pais AND d2.region = Region
+							GROUP BY z2.id_pais, d2.region, de2.id_raza) td1) AND Raza ='INDIGENAS' ;
 
 
 /*
