@@ -90,12 +90,54 @@ Desplegar el nombre del país, nombre del partido político y número de alcald�
 los partidos políticos que ganaron más alcaldías por país.
 */
 
+SELECT p.nombre AS Pais,
+	   pt.nombre AS Partido,
+       COUNT(td2.Partido) AS Alcaldias
+FROM (SELECT  z.id_zona AS Zona,
+				z.id_pais AS Pais,
+				z.id_municipio AS Municipio,
+				de.id_partido AS Partido, 
+				SUM((de.alfabetos + de.analfabetos)) AS Votos
+		FROM detalle_eleccion de
+		INNER JOIN eleccion e ON de.id_eleccion = e.id_eleccion
+		INNER JOIN zona z ON e.id_zona = z.id_zona
+		GROUP BY z.id_zona, de.id_partido
+		HAVING Votos = (SELECT MAX(td1.votos) FROM(SELECT z2.id_pais, z2.id_municipio, de2.id_partido, SUM((de2.alfabetos + de2.analfabetos)) AS Votos
+									FROM detalle_eleccion de2
+									INNER JOIN eleccion e2 ON de2.id_eleccion = e2.id_eleccion
+									INNER JOIN zona z2 ON e2.id_zona = z2.id_zona
+									WHERE z2.id_zona = Zona
+									GROUP BY z2.id_zona, de2.id_partido) td1)) td2
+INNER JOIN Pais p ON td2.Pais = p.id_pais
+INNER JOIN Partido pt On td2.Partido = pt.id_partido
+GROUP BY td2.Pais, td2.Partido
+HAVING Alcaldias = (SELECT MAX(Alcaldias3) FROM (SELECT td2.Pais2 AS Pais3,
+							   td2.Partido2 AS Partido3,
+							   COUNT(td2.Partido2) AS Alcaldias3
+						FROM (SELECT  z.id_zona AS Zona2,
+										z.id_pais AS Pais2,
+										z.id_municipio AS Municipio2,
+										de.id_partido AS Partido2, 
+										SUM((de.alfabetos + de.analfabetos)) AS Votos
+								FROM detalle_eleccion de
+								INNER JOIN eleccion e ON de.id_eleccion = e.id_eleccion
+								INNER JOIN zona z ON e.id_zona = z.id_zona
+								GROUP BY z.id_zona, de.id_partido
+								HAVING Votos = (SELECT MAX(td1.votos) FROM(SELECT z2.id_pais, z2.id_municipio, de2.id_partido, SUM((de2.alfabetos + de2.analfabetos)) AS Votos
+															FROM detalle_eleccion de2
+															INNER JOIN eleccion e2 ON de2.id_eleccion = e2.id_eleccion
+															INNER JOIN zona z2 ON e2.id_zona = z2.id_zona
+															WHERE z2.id_zona = Zona2
+															GROUP BY z2.id_zona, de2.id_partido) td1)) td2
+						GROUP BY td2.Pais2, td2.Partido2) td3
+						WHERE Pais3 = Pais);
 
 /*
 -------------------------- CONSULTA NO. 4 --------------------------------------
 Desplegar todas las regiones por país en las que predomina la raza indígena. 
 Es decir, hay más votos que las otras razas.
 */
+
 
 
 /*
@@ -143,7 +185,20 @@ por país, sin importar raza o sexo.
 -------------------------- CONSULTA NO. 10 -------------------------------------
 Desplegar el nombre del país y el porcentaje de votos por raza.
 */
-
+SELECT p.nombre AS Pais,
+	r.nombre AS Raza,
+    calculo_porcentaje(SUM(de.analfabetos + de.alfabetos), (SELECT SUM(de2.analfabetos + de2.alfabetos) 
+															FROM detalle_eleccion de2
+															INNER JOIN eleccion e2 ON de2.id_eleccion = e2.id_eleccion
+															INNER JOIN zona z2 ON e2.id_zona = z2.id_zona
+															WHERE z2.id_pais = z.id_pais
+															GROUP BY z2.id_pais)) AS PORCENTAJE
+FROM detalle_eleccion de
+INNER JOIN eleccion e ON de.id_eleccion = e.id_eleccion
+INNER JOIN zona z ON e.id_zona = z.id_zona
+INNER JOIN pais p ON z.id_pais = p.id_pais
+INNER JOIN raza r ON de.id_raza = r.id_raza
+GROUP BY z.id_pais, de.id_raza;
 
 /*
 -------------------------- CONSULTA NO. 11 -------------------------------------
@@ -158,7 +213,14 @@ el partido que obtuvo más votos y el partido que obtuvo menos votos.
 Desplegar el total de votos y el porcentaje de votos emitidos por mujeres 
 indígenas alfabetas.
 */
-
+SELECT e.nombre, e.año, SUM(analfabetos + alfabetos) AS Votos, calculo_porcentaje((SELECT SUM(de2.alfabetos) FROM detalle_eleccion de2
+																					INNER JOIN eleccion e2 ON de2.id_eleccion = e2.id_eleccion
+																					INNER JOIN raza r2 ON de2.id_raza = r2.id_raza
+																					WHERE de2.sexo = 'mujeres' AND r2.nombre = 'INDIGENAS' AND e2.año = e.año
+																					GROUP BY e2.nombre, e2.año),(SUM(analfabetos + alfabetos))) AS Porcentaje 
+FROM detalle_eleccion de
+INNER JOIN eleccion e ON de.id_eleccion = e.id_eleccion
+GROUP BY e.nombre, e.año;
 /*
 -------------------------- CONSULTA NO. 13 -------------------------------------
 Desplegar el nombre del país, el porcentaje de votos de ese país en el que han 
@@ -166,11 +228,38 @@ votado mayor porcentaje de analfabetas. (tip: solo desplegar un nombre de país,
 el de mayor porcentaje).
 */
 
+SELECT p.nombre AS Pais, calculo_porcentaje(SUM(de.analfabetos), SUM(de.analfabetos + alfabetos)) AS Porcentaje FROM detalle_eleccion de 
+INNER JOIN eleccion e ON de.id_eleccion = e.id_eleccion
+INNER JOIN zona z ON e.id_zona = z.id_zona
+INNER JOIN pais p ON z.id_pais = p.id_pais
+GROUP BY z.id_pais
+HAVING Porcentaje = (SELECT MAX(td1.Porcentaje) 
+					FROM (SELECT z.id_pais, calculo_porcentaje(SUM(de.analfabetos), SUM(de.analfabetos + alfabetos)) AS Porcentaje 
+                    FROM detalle_eleccion de 
+							INNER JOIN eleccion e ON de.id_eleccion = e.id_eleccion
+							INNER JOIN zona z ON e.id_zona = z.id_zona
+							GROUP BY z.id_pais) td1);
+
 /*
 -------------------------- CONSULTA NO. 14 -------------------------------------
 Desplegar la lista de departamentos de Guatemala y número de votos obtenidos, 
 para los departamentos que obtuvieron más votos que el departamento de Guatemala.
 */
+SELECT d.nombre AS Departamento,  SUM(de.analfabetos + de.alfabetos) AS Votos 
+FROM detalle_eleccion de
+INNER JOIN eleccion e ON de.id_eleccion = e.id_eleccion
+INNER JOIN zona z ON e.id_zona = z.id_zona
+INNER JOIN pais p ON z.id_pais = p.id_pais
+INNER JOIN departamento d ON z.id_departamento = d.id_departamento
+WHERE p.nombre = 'GUATEMALA'
+GROUP BY z.id_pais, z.id_departamento
+HAVING Votos > (SELECT SUM(de.analfabetos + de.alfabetos) FROM detalle_eleccion de
+				INNER JOIN eleccion e ON de.id_eleccion = e.id_eleccion
+				INNER JOIN zona z ON e.id_zona = z.id_zona
+				INNER JOIN pais p ON z.id_pais = p.id_pais
+				INNER JOIN departamento d ON z.id_departamento = d.id_departamento
+				WHERE p.nombre = 'GUATEMALA' AND d.nombre = 'GUATEMALA'
+				GROUP BY z.id_pais, z.id_departamento);
 
 /*
 -------------------------- CONSULTA NO. 15 -------------------------------------
