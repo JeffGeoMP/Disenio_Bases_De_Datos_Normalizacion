@@ -285,8 +285,50 @@ Desplegar el nombre del país en el cual las elecciones han sido más peleadas.
 Para determinar esto se debe calcular la diferencia de porcentajes de votos entre 
 el partido que obtuvo más votos y el partido que obtuvo menos votos.
 */
-
-
+SELECT p.nombre AS Pais,
+		(td3.Votos_Maximo - td3.Votos_Minimo) AS Diferencia
+FROM(SELECT z.id_pais AS Pais, 
+			(SELECT MAX(td1.Votos_MAX) AS Votos_Maximo 
+				FROM(SELECT SUM(de2.analfabetos + de2.alfabetos) AS Votos_MAX
+					FROM detalle_eleccion de2
+					INNER JOIN eleccion e2 ON de2.id_eleccion = e2.id_eleccion
+					INNER JOIN zona z2 ON e2.id_zona = z2.id_zona
+					WHERE z2.id_pais = z.id_pais
+					GROUP BY z2.id_pais, de2.id_partido) td1) AS Votos_Maximo,
+			(SELECT MIN(td2.Votos_MIN) AS Votos_Minimo 
+				FROM(SELECT SUM(de3.analfabetos + de3.alfabetos) AS Votos_MIN
+					FROM detalle_eleccion de3
+					INNER JOIN eleccion e3 ON de3.id_eleccion = e3.id_eleccion
+					INNER JOIN zona z3 ON e3.id_zona = z3.id_zona
+					WHERE z3.id_pais = z.id_pais
+					GROUP BY z3.id_pais, de3.id_partido) td2) AS Votos_Minimo
+	FROM detalle_eleccion de
+	INNER JOIN eleccion e ON de.id_eleccion = e.id_eleccion
+	INNER JOIN zona z ON e.id_zona = z.id_zona
+	GROUP BY z.id_pais) td3
+    INNER JOIN pais p ON td3.Pais = p.id_pais
+    HAVING Diferencia = (SELECT MIN(td4.Diferencia) 
+FROM(SELECT td3.Pais,
+			(td3.Votos_Maximo - td3.Votos_Minimo) AS Diferencia
+	FROM(SELECT z.id_pais AS Pais, 
+				(SELECT MAX(td1.Votos_MAX) AS Votos_Maximo 
+					FROM(SELECT SUM(de2.analfabetos + de2.alfabetos) AS Votos_MAX
+						FROM detalle_eleccion de2
+						INNER JOIN eleccion e2 ON de2.id_eleccion = e2.id_eleccion
+						INNER JOIN zona z2 ON e2.id_zona = z2.id_zona
+						WHERE z2.id_pais = z.id_pais
+						GROUP BY z2.id_pais, de2.id_partido) td1) AS Votos_Maximo,
+				(SELECT MIN(td2.Votos_MIN) AS Votos_Minimo 
+					FROM(SELECT SUM(de3.analfabetos + de3.alfabetos) AS Votos_MIN
+						FROM detalle_eleccion de3
+						INNER JOIN eleccion e3 ON de3.id_eleccion = e3.id_eleccion
+						INNER JOIN zona z3 ON e3.id_zona = z3.id_zona
+						WHERE z3.id_pais = z.id_pais
+						GROUP BY z3.id_pais, de3.id_partido) td2) AS Votos_Minimo
+		FROM detalle_eleccion de
+		INNER JOIN eleccion e ON de.id_eleccion = e.id_eleccion
+		INNER JOIN zona z ON e.id_zona = z.id_zona
+		GROUP BY z.id_pais) td3) td4);
 /*
 -------------------------- CONSULTA NO. 12 -------------------------------------
 Desplegar el total de votos y el porcentaje de votos emitidos por mujeres 
@@ -346,3 +388,11 @@ Desplegar el total de votos de los municipios agrupados por su letra inicial.
 Es decir, agrupar todos los municipios con letra A y calcular su número de votos, 
 lo mismo para los de letra inicial B, y así sucesivamente hasta la Z.
 */
+SELECT SUBSTRING(m.nombre,1,1) AS Letra,
+		SUM(de.analfabetos + de.alfabetos) AS Votos
+FROM detalle_eleccion de
+INNER JOIN eleccion e ON de.id_eleccion = e.id_eleccion
+INNER JOIN zona z ON e.id_zona = z.id_zona
+INNER JOIN municipio m ON z.id_municipio = m.id_municipio
+GROUP BY ASCII(SUBSTRING(m.nombre,1,1))
+ORDER BY m.nombre;
