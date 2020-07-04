@@ -12,17 +12,6 @@ BEGIN
     SET porcentaje = porcentaje/Total;
 RETURN porcentaje;
 END $$
-
-select * from data_temporal;
-select * from detalle_eleccion;
-select * from municipio;
-select * from departamento;
-select * from raza;
-select * from pais;
-select * from zona;
-select * from eleccion;
-select * from partido;
-
 */
 
 /*
@@ -59,8 +48,6 @@ HAVING Porcentaje = (SELECT MAX(tp.Porcentaje) AS Porcentaje_Maximo FROM (
 	INNER JOIN pais p4 ON z4.id_pais = p4.id_pais
     WHERE p4.nombre = Pais
 	GROUP by e4.nombre, z4.id_pais, de4.id_partido) tp);
-
-
 
 /*
 -------------------------- CONSULTA NO. 2 --------------------------------------
@@ -141,24 +128,23 @@ Es decir, hay más votos que las otras razas.
 SELECT p.nombre AS Pais,
 		d.region AS Region,
         r.nombre AS Raza,
-        SUM(analfabetos + alfabetos) AS Votos 
+        SUM(de.analfabetos + de.alfabetos) AS Votos 
 FROM detalle_eleccion de
 INNER JOIN eleccion e ON de.id_eleccion = e.id_eleccion
 INNER JOIN zona z ON e.id_zona = z.id_zona
-INNER JOIN pais p ON z.id_pais = p.id_pais
 INNER JOIN raza r ON de.id_raza = r.id_raza
+INNER JOIN pais p ON z.id_pais = p.id_pais
 INNER JOIN departamento d ON z.id_departamento = d.id_departamento
 GROUP BY z.id_pais, d.region, de.id_raza
-HAVING Votos = (SELECT MAX(td1.Votos) FROM (SELECT p2.nombre AS Pais2, d2.region AS Region2, r2.nombre AS Raza2, SUM(de2.analfabetos + de2.alfabetos) AS Votos 
-							FROM detalle_eleccion de2
-							INNER JOIN eleccion e2 ON de2.id_eleccion = e2.id_eleccion
-							INNER JOIN zona z2 ON e2.id_zona = z2.id_zona
-							INNER JOIN pais p2 ON z2.id_pais = p2.id_pais
-							INNER JOIN raza r2 ON de2.id_raza = r2.id_raza
-							INNER JOIN departamento d2 ON z2.id_departamento = d2.id_departamento
-							WHERE p2.nombre = Pais AND d2.region = Region
-							GROUP BY z2.id_pais, d2.region, de2.id_raza) td1) AND Raza ='INDIGENAS' ;
-
+HAVING Votos = (SELECT MAX(td1.Votos) FROM (SELECT SUM(de2.analfabetos + de2.alfabetos) AS Votos 
+						FROM detalle_eleccion de2
+						INNER JOIN eleccion e2 ON de2.id_eleccion = e2.id_eleccion
+						INNER JOIN zona z2 ON e2.id_zona = z2.id_zona
+						INNER JOIN raza r2 ON de2.id_raza = r2.id_raza
+						INNER JOIN departamento d2 ON z2.id_departamento = d2.id_departamento
+						WHERE z2.id_pais = z.id_pais AND d2.region = d.region
+						GROUP BY z2.id_pais, d2.region, de2.id_raza) td1) AND
+		r.nombre = 'INDIGENAS';
 
 /*
 -------------------------- CONSULTA NO. 5 --------------------------------------
@@ -169,7 +155,23 @@ de primaria y menor que el 30% de votos de nivel medio
 (correspondiente a ese municipio y al partido político).  
 Ordene sus resultados de mayor a menor.
 */
-
+SELECT p.nombre,
+		d.nombre, 
+		m.nombre,
+        pt.nombre,
+        (SUM(primaria) * 0.25) AS Primaria_25P,
+        (SUM(media) * 0.30) AS Media_30P,
+        SUM(universitario) AS Votos_Universitarios
+FROM detalle_eleccion de
+INNER JOIN eleccion e ON de.id_eleccion = e.id_eleccion
+INNER JOIN zona z ON e.id_zona = z.id_zona
+INNER JOIN pais p ON z.id_pais = p.id_pais
+INNER JOIN departamento d ON z.id_departamento = d.id_departamento
+INNER JOIN municipio m ON z.id_municipio = m.id_municipio
+INNER JOIN partido pt ON de.id_partido = pt.id_partido
+GROUP BY z.id_municipio, de.id_partido
+HAVING Votos_Universitarios>Primaria_25P AND Votos_Universitarios<Media_30P
+ORDER BY Votos_Universitarios DESC;
 
 /*
 -------------------------- CONSULTA NO. 6 --------------------------------------
@@ -177,7 +179,28 @@ Desplegar el porcentaje de mujeres universitarias y hombres universitarios que
 votaron por departamento, donde las mujeres universitarias que votaron fueron más 
 que los hombres universitarios que votaron.
 */
-
+SELECT d5.nombre AS Departamento,
+		td1.Porcentaje_Votos_Mujeres,
+        td1.Porcentaje_Votos_Hombres
+        FROM (SELECT z.id_pais AS Pais,
+							z.id_departamento AS Departamento,
+							calculo_porcentaje((SELECT SUM(de2.universitario) FROM detalle_eleccion de2
+								INNER JOIN eleccion e2 ON de2.id_eleccion = e2.id_eleccion
+								INNER JOIN zona z2 ON e2.id_zona = z2.id_zona
+								WHERE de2.sexo = 'mujeres' AND z2.id_pais = Pais AND z2.id_departamento = Departamento
+								GROUP BY z2.id_pais, z2.id_departamento), SUM(universitario)) AS Porcentaje_Votos_Mujeres,		
+							calculo_porcentaje((SELECT SUM(de3.universitario) AS Votos_Hombres
+								FROM detalle_eleccion de3
+								INNER JOIN eleccion e3 ON de3.id_eleccion = e3.id_eleccion
+								INNER JOIN zona z3 ON e3.id_zona = z3.id_zona
+								WHERE de3.sexo = 'hombres' AND z3.id_pais = Pais AND z3.id_departamento = Departamento
+								GROUP BY z3.id_pais, z3.id_departamento),SUM(universitario)) AS Porcentaje_Votos_Hombres
+					FROM detalle_eleccion de
+					INNER JOIN eleccion e ON de.id_eleccion = e.id_eleccion
+					INNER JOIN zona z ON e.id_zona = z.id_zona
+					GROUP  BY z.id_pais, z.id_departamento
+					HAVING Porcentaje_Votos_Mujeres>Porcentaje_Votos_Hombres) td1
+INNER JOIN departamento d5 ON td1.Departamento = d5.id_departamento;
 
 /*
 -------------------------- CONSULTA NO. 7 --------------------------------------
@@ -185,23 +208,59 @@ Desplegar el nombre del país, la región y el promedio de votos por departament
 Por ejemplo: si la región tiene tres departamentos, se debe sumar todos los votos 
 de la región y dividirlo dentro de tres (número de departamentos de la región).
 */
-
+SELECT p.nombre AS Pais, d.region, SUM(de.analfabetos + de.alfabetos)/(SELECT COUNT(*) FROM (SELECT DISTINCT z2.id_pais, d2.region, z2.id_departamento FROM zona z2
+						INNER JOIN departamento d2 ON z2.id_departamento = d2.id_departamento
+						WHERE z2.id_pais = z.id_pais AND d2.region = d.region) td1) AS Promedio
+FROM detalle_eleccion de
+INNER JOIN eleccion e ON de.id_eleccion = e.id_eleccion
+INNER JOIN zona z ON e.id_zona = z.id_zona
+INNER JOIN departamento d ON z.id_departamento = d.id_departamento
+INNER JOIN pais p ON z.id_pais = p.id_pais
+GROUP BY z.id_pais, d.region
+ORDER BY p.nombre, d.region;
 
 /*
 -------------------------- CONSULTA NO. 8 --------------------------------------
 Desplegar el nombre del municipio y el nombre de los dos partidos políticos con 
 más votos en el municipio, ordenados por país.
 */
-
-
+SELECT p.nombre AS Pais,
+        m.nombre AS Municipio,
+        pt.nombre AS Partido,
+        td2.Votos
+FROM(SELECT *, RANK() OVER (PARTITION BY td1.Municipio ORDER BY td1.Votos DESC) Ranking
+	FROM (SELECT z.id_pais AS Pais,
+			z.id_departamento AS Departamento,
+			z.id_municipio AS Municipio,
+			de.id_partido AS Partido,
+			SUM(analfabetos + alfabetos) AS Votos 
+			FROM detalle_eleccion de
+			INNER JOIN eleccion e ON de.id_eleccion = e.id_eleccion
+			INNER JOIN zona z ON e.id_zona = z.id_zona
+			GROUP BY z.id_zona, de.id_partido) td1) td2
+INNER JOIN pais p ON td2.Pais = p.id_pais
+INNER JOIN departamento d ON td2.Departamento = d.id_departamento
+INNER JOIN municipio m ON td2.Municipio = m.id_municipio
+INNER JOIN partido pt ON td2.Partido = pt.id_partido
+WHERE td2.Ranking <= 2
+ORDER BY p.nombre, m.nombre;
 /*
+
 -------------------------- CONSULTA NO. 9 --------------------------------------
 Desplegar el total de votos de cada nivel de escolaridad (primario, medio, universitario) 
 por país, sin importar raza o sexo.
 */
-
-
+SELECT p.nombre AS Pais,
+		SUM(de.primaria) AS Votos_Primaria,
+        SUM(de.media) AS Votos_Media,
+        SUM(de.universitario) AS Votos_Universitario
+FROM detalle_eleccion de
+INNER JOIN eleccion e ON de.id_eleccion = e.id_eleccion
+INNER JOIN zona z ON e.id_zona = z.id_zona
+INNER JOIN pais p ON z.id_pais = p.id_pais
+GROUP BY z.id_pais;
 /*
+
 -------------------------- CONSULTA NO. 10 -------------------------------------
 Desplegar el nombre del país y el porcentaje de votos por raza.
 */
