@@ -1,10 +1,10 @@
 USE Proyecto2;
 
 /* ------------- Verificaciones Iniciales ------------------
--- Verificamos que la carga este activa
-SHOW GLOBAL VARIABLES LIKE 'local_infile';
+-- Extraemos la ruta preestablecida para cargar el archivo CSV,
+-- con el siguiente comando, posteriormente copiamos nuestro archivo
+-- csv a esta ruta.
 
--- Verificamos la ruta preestablecida para cargar el archivo CSV
 SHOW VARIABLES LIKE "secure_file_priv";
 --------------------------------------------------------------*/
 
