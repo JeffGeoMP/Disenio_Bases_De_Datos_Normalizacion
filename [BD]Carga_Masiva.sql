@@ -31,7 +31,7 @@ UNIVERSITARIOS		INT
 /*----------------------------------------------------------------------------------------*/
 
 /*-------------------- Carga Masiva de Datos a partir del CSV ----------------------------*/
-LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/ICE-FUENTE-MEJORADO.csv'
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/ICE-FUENTE.csv'
 INTO TABLE Proyecto2.data_temporal
 FIELDS TERMINATED BY ';'
 ENCLOSED BY '"'
